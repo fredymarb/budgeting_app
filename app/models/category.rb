@@ -4,6 +4,8 @@ class Category < ApplicationRecord
 
   belongs_to :category_group
 
+  has_many :monthly_allocations, dependent: :destroy
+
   enum goal_type: {
     weekly_funding: 0,
     bi_weekly_funding: 1,
