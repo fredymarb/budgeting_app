@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_11_183106) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_11_190807) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_11_183106) do
     t.string "currency", default: "USD", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "category_groups", force: :cascade do |t|
+    t.bigint "budget_id", null: false
+    t.string "name", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_category_groups_on_budget_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -56,6 +65,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_11_183106) do
   end
 
   add_foreign_key "accounts", "budgets", on_delete: :cascade
+  add_foreign_key "category_groups", "budgets", on_delete: :cascade
   add_foreign_key "memberships", "budgets"
   add_foreign_key "memberships", "users"
 end
