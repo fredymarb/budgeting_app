@@ -4,6 +4,7 @@ class Budget < ApplicationRecord
 
   has_many :accounts, dependent: :destroy
   has_many :category_groups, dependent: :destroy
+  has_many :categories, through: :category_groups
 
   validates :name, :currency, presence: true
 end
