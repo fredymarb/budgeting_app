@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  belongs_to :budget
+  include BudgetScoped
 
   enum kind: { checking: 0, savings: 1, cash: 2, investment: 3, credit: 4 }
 
