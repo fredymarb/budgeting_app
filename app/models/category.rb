@@ -7,7 +7,7 @@ class Category < ApplicationRecord
   has_many :monthly_allocations, dependent: :destroy
   has_many :transactions, dependent: :restrict_with_error
 
-  enum goal_type: {
+  enum :goal_type, {
     weekly_funding: 0,
     bi_weekly_funding: 1,
     monthly_funding: 2,

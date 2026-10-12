@@ -6,7 +6,7 @@ class Transaction < ApplicationRecord
   belongs_to :payee
   belongs_to :category
 
-  enum cleared: { uncleared: 0, cleared: 1, reconciled: 2 }
+  enum :cleared, { uncleared: 0, cleared: 1, reconciled: 2 }
 
   validates :account, :date, presence: true
   validates :amount_minor, presence: true, numericality: { greater_than: 0 }
