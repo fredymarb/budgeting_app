@@ -65,4 +65,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# User authentication and management [https://github.com/heartcombo/devise]
 gem "devise", "~> 5.0"
+
+# View components for building reusable UI elements [https://viewcomponent.org]
+gem "view_component", "~> 4.15"
