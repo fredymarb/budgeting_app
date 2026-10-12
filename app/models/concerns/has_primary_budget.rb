@@ -12,6 +12,10 @@ module HasPrimaryBudget
     primary_budget = Budget.create!(name: "My Budget")
     memberships.create!(budget: primary_budget, role: :owner)
 
+    primary_budget.accounts.create!(name: "Savings", on_budget: true, kind: :savings)
+    primary_budget.accounts.create!(name: "Checking", on_budget: true, kind: :checking)
+    primary_budget.accounts.create!(name: "Cash", on_budget: true, kind: :cash)
+
     default_categories = {
       "Bills" => [ "Rent/Mortgage", "Electric", "Internet", "Phone" ],
       "Needs" => [ "Groceries", "Transportation", "Medical" ],
