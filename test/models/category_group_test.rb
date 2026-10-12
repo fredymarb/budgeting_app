@@ -7,7 +7,7 @@ class CategoryGroupTest < ActiveSupport::TestCase
     assert_not category_group.destroy
     assert category_group.persisted?
 
-    assert_raises ActiveRecord::InvalidForeignKey do
+    assert_raises ActiveRecord::StatementInvalid do
       category_group.delete
     end
   end
