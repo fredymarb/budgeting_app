@@ -1,2 +1,19 @@
-<h1>Budgets#show</h1>
-<p>Find me in app/views/budgets/show.html.erb</p>
+<main>
+  <%# Sidebar component for the current budget and user %>
+  <%= render Sidebar::SidebarComponent.new(budget: @budget, user: current_user) %>
+
+  <%# Main content area for the budget overview %>
+  <div class="budget-overview">
+    <div class="budget-overview-header">
+      <div class="calender"></div>
+      <div class="asign-money"></div>
+      <div class="age-of-money"></div>
+    </div>
+
+    <%# Budget content body and aside %>
+    <div class="budget-overview-main">
+      <div class="budget-content"></div>
+      <aside class="budget-aside"></aside>
+    </div>
+  </div>
+</main>
