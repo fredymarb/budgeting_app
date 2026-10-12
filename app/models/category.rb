@@ -5,6 +5,7 @@ class Category < ApplicationRecord
   belongs_to :category_group
 
   has_many :monthly_allocations, dependent: :destroy
+  has_many :transactions, dependent: :restrict_with_error
 
   enum goal_type: {
     weekly_funding: 0,

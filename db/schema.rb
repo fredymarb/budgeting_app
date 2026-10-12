@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_11_231318) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_11_234011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -87,6 +87,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_11_231318) do
     t.index ["budget_id"], name: "index_payees_on_budget_id"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "budget_id", null: false
+    t.bigint "account_id", null: false
+    t.bigint "payee_id"
+    t.bigint "category_id"
+    t.date "date", null: false
+    t.bigint "amount_minor", null: false
+    t.string "memo"
+    t.integer "cleared", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["budget_id"], name: "index_transactions_on_budget_id"
+    t.index ["category_id"], name: "index_transactions_on_category_id"
+    t.index ["payee_id"], name: "index_transactions_on_payee_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -108,4 +125,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_11_231318) do
   add_foreign_key "monthly_allocations", "budgets", on_delete: :cascade
   add_foreign_key "monthly_allocations", "categories", on_delete: :cascade
   add_foreign_key "payees", "budgets", on_delete: :cascade
+  add_foreign_key "transactions", "accounts", on_delete: :restrict
+  add_foreign_key "transactions", "budgets", on_delete: :cascade
+  add_foreign_key "transactions", "categories", on_delete: :restrict
+  add_foreign_key "transactions", "payees", on_delete: :restrict
 end
