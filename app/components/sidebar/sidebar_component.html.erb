@@ -1,0 +1,25 @@
+<aside class="sidebar">
+  <div class="sidebar-head">
+    <div>
+      <div class="budget-name"><%= @budget.name %></div>
+      <div class="user-email"><%= @user.email %></div>
+    </div>
+  </div>
+
+  <div class="side-body" id="side-body">
+    <nav class="side-nav">
+      <%# Navigation link to the budget overview page %>
+      <%= link_to "Budget", budget_path(@budget), class: ["nav-item", ("active" if controller_name == "budgets")] %>
+
+      <%# List of all accounts %>
+      <% @accounts.each do |account| %>
+      <li><%= account.name %></li>
+      <% end %>
+    </nav>
+
+    <div class="sidebar-foot">
+      <%= link_to "Account settings", edit_user_registration_path, class: "link-btn" %>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "link-btn" %>
+    </div>
+  </div>
+</aside>
