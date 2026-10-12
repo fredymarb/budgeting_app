@@ -6,5 +6,5 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   # Require users to be authenticated before accessing any controller actions.
-  before_action :authenticate_user!
+  before_action :authenticate_user!, unless: :devise_controller?
 end
