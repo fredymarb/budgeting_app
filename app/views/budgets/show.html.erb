@@ -5,7 +5,9 @@
   <%# Main content area for the budget overview %>
   <div class="budget-overview">
     <div class="budget-overview-header">
-      <div class="calender"></div>
+      <div class="calender">
+        <%= @month.strftime("%B %Y") %>
+      </div>
       <div class="asign-money"></div>
       <div class="age-of-money"></div>
     </div>
