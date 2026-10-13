@@ -31,6 +31,20 @@ class TransactionsControllerTest < ActionDispatch::IntegrationTest
     assert_equal budgets(:one).id, Transaction.find(response.parsed_body.fetch("id")).budget_id
   end
 
+  test "cannot create a transaction with an account from another budget" do
+    sign_in users(:one)
+
+    post transactions_url, params: {
+      transaction: {
+        account_id: accounts(:two).id,
+        date: Date.current,
+        amount_minor: 2500
+      }
+    }, as: :json
+
+    assert_response :not_found
+  end
+
   test "cannot access a transaction from another budget" do
     sign_in users(:one)
 

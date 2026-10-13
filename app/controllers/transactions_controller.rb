@@ -60,16 +60,10 @@ class TransactionsController < ApplicationController
   end
 
   def assign_transaction_params
-    attributes = transaction_params
-    @transaction.assign_attributes(attributes.except(:account_id, :payee_id, :category_id))
+    attributes = params.require(:transaction)
+    @transaction.assign_attributes(attributes.permit(:date, :amount_minor, :memo, :cleared))
     @transaction.account = @budget.accounts.find(attributes[:account_id]) if attributes[:account_id].present?
     @transaction.payee = @budget.payees.find(attributes[:payee_id]) if attributes[:payee_id].present?
     @transaction.category = @budget.categories.find(attributes[:category_id]) if attributes[:category_id].present?
-  end
-
-  def transaction_params
-    params.require(:transaction).permit(
-      :account_id, :payee_id, :category_id, :date, :amount_minor, :memo, :cleared
-    )
   end
 end
