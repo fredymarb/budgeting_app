@@ -9,5 +9,8 @@ class UserTest < ActiveSupport::TestCase
     assert user.memberships.find_by!(budget: budget).owner?
     assert_equal 3, budget.category_groups.count
     assert_equal 10, budget.categories.count
+    assert_equal 3, budget.transactions.count
+    assert_equal [ "Neighborhood Market", "Corner Cafe", "Property Management" ],
+      budget.transactions.includes(:payee).order(:id).map { |transaction| transaction.payee.name }
   end
 end
