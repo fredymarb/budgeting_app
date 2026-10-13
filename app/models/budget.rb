@@ -7,6 +7,7 @@ class Budget < ApplicationRecord
   has_many :categories, through: :category_groups
   has_many :payees, dependent: :restrict_with_error
   has_many :monthly_allocations, through: :categories
+  has_many :transactions, through: :accounts
 
   validates :name, :currency, presence: true
 end
