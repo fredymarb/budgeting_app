@@ -14,7 +14,24 @@
 
     <%# Budget content body and aside %>
     <div class="budget-overview-main">
-      <div class="budget-content"></div>
+      <div class="budget-content">
+        <div class="category-budget-table" role="table" aria-label="Budget categories">
+          <div class="category-table-header" role="row">
+            <div class="category-table-label" role="columnheader">Category</div>
+            <div class="category-table-label" role="columnheader">Budgeted</div>
+            <div class="category-table-label" role="columnheader">Activity</div>
+            <div class="category-table-label" role="columnheader">Available</div>
+          </div>
+          <% @category_groups.each do |category_group| %>
+            <%= render CategoryGroup::CategoryGroupComponent.new(
+              category_group: category_group,
+              budgeted_by_category: @budgeted_by_category,
+              activity_by_category: @activity_by_category,
+              currency: @budget.currency
+            ) %>
+          <% end %>
+        </div>
+      </div>
       <aside class="budget-aside"></aside>
     </div>
   </div>

@@ -269,3 +269,188 @@ body {
   flex: 1;
   background: #fff;
 }
+
+.budget-content {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.category-budget-table {
+  width: 100%;
+  max-width: 900px;
+  min-width: 680px;
+  color: #374151;
+  font-size: 13px;
+}
+
+.category-table-header,
+.category-group-row,
+.category-budget-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) repeat(3, minmax(105px, 145px));
+  align-items: center;
+}
+
+.category-table-header {
+  min-height: 36px;
+  border-bottom: 1px solid #d9dee7;
+  color: #737b87;
+  background: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .35px;
+  text-transform: uppercase;
+}
+
+.category-table-label {
+  padding: 0 10px;
+}
+
+.category-table-label:not(:first-child) {
+  text-align: right;
+}
+
+.category-group-section {
+  border-bottom: 1px solid #dfe3e9;
+}
+
+.category-group-row {
+  min-height: 38px;
+  padding: 0 10px;
+  border-bottom: 1px solid #d9dee7;
+  color: #344b65;
+  background: #edf1f6;
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+}
+
+.category-group-row::-webkit-details-marker {
+  display: none;
+}
+
+.category-group-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.category-checkbox {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  border: 1px solid #a8afb9;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.category-group-chevron {
+  color: #536d88;
+  font-size: 14px;
+  line-height: 1;
+  transition: transform 120ms ease;
+}
+
+.category-group-section:not([open]) .category-group-chevron {
+  transform: rotate(-90deg);
+}
+
+.category-number {
+  padding: 0 2px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.category-group-row .category-number {
+  padding: 0;
+}
+
+.category-activity {
+  color: #56616f;
+}
+
+.category-budget-row {
+  min-height: 46px;
+  padding: 0 10px;
+  border-bottom: 1px solid #e8ebef;
+  background: #fff;
+}
+
+.category-budget-row:hover {
+  background: #f8fafc;
+}
+
+.category-name-cell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  padding-right: 12px;
+}
+
+.category-name-content {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  grid-template-columns: minmax(0, auto) minmax(60px, 1fr);
+  align-items: center;
+  gap: 3px 12px;
+}
+
+.category-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-funding-label {
+  overflow: hidden;
+  color: #68717d;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.category-progress {
+  display: block;
+  height: 4px;
+  overflow: hidden;
+  grid-column: 1 / -1;
+  border-radius: 2px;
+  background: #e9f2e5;
+}
+
+.category-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #68bd2e;
+}
+
+.category-available {
+  display: inline-block;
+  min-width: 62px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-align: right;
+}
+
+.category-available--funded {
+  color: #315b24;
+  background: #c7eea5;
+}
+
+.category-available--empty {
+  color: #737b85;
+  background: #e7eaed;
+}
+
+.category-available--overspent {
+  color: #8d3028;
+  background: #fde0dc;
+}
+
+.category-group-categories[role="rowgroup"] {
+  display: block;
+}

@@ -1,1 +1,29 @@
-<div>Add Category template here</div>
+<div class="category-budget-row" role="row">
+  <div class="category-name-cell" role="cell">
+    <span class="category-checkbox" aria-hidden="true"></span>
+    <div class="category-name-content">
+      <span class="category-name"><%= @category.name %></span>
+      <% if funding_label.present? %>
+        <span class="category-funding-label"><%= funding_label %></span>
+      <% end %>
+      <% if @budgeted_minor.positive? %>
+        <span
+          class="category-progress"
+          role="progressbar"
+          aria-label="Spent from <%= @category.name %> budget"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="<%= spending_percent %>">
+          <span class="category-progress-fill" style="width: <%= spending_percent %>%"></span>
+        </span>
+      <% end %>
+    </div>
+  </div>
+  <div class="category-number" role="cell"><%= helpers.budget_money(@budgeted_minor, currency: @currency) %></div>
+  <div class="category-number category-activity" role="cell"><%= helpers.budget_money(@activity_minor, currency: @currency) %></div>
+  <div class="category-number" role="cell">
+    <span class="category-available <%= available_class %>">
+      <%= helpers.budget_money(@available_minor, currency: @currency) %>
+    </span>
+  </div>
+</div>

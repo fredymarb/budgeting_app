@@ -1,1 +1,25 @@
-<div>Add CategoryGroup template here</div>
+<details class="category-group-section" open>
+  <summary class="category-group-row" role="row">
+    <div class="category-group-name" role="cell">
+      <span class="category-checkbox" aria-hidden="true"></span>
+      <span class="category-group-chevron" aria-hidden="true">⌄</span>
+      <span><%= @category_group.name %></span>
+    </div>
+    <div class="category-number" role="cell"><%= helpers.budget_money(budgeted_minor, currency: @currency) %></div>
+    <div class="category-number category-activity" role="cell"><%= helpers.budget_money(activity_minor, currency: @currency) %></div>
+    <div class="category-number" role="cell"><%= helpers.budget_money(available_minor, currency: @currency) %></div>
+  </summary>
+  <div class="category-group-categories" role="rowgroup">
+    <% @categories.each do |category| %>
+      <% budgeted = @budgeted_by_category.fetch(category.id, 0) %>
+      <% activity = @activity_by_category.fetch(category.id, 0) %>
+      <%= render Category::CategoryComponent.new(
+        category: category,
+        budgeted_minor: budgeted,
+        activity_minor: -activity,
+        available_minor: budgeted - activity,
+        currency: @currency
+      ) %>
+    <% end %>
+  </div>
+</details>
