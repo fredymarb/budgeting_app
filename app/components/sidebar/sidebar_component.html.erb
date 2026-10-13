@@ -1,21 +1,85 @@
 <aside class="sidebar">
   <div class="sidebar-head">
-    <div>
+    <div class="sidebar-brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" focusable="false">
+        <path d="M12 2 2.5 7.4v9.2L12 22l9.5-5.4V7.4L12 2Zm0 2.3 6.8 3.9L12 12 5.2 8.2 12 4.3ZM4.5 10l6.5 3.7v5.4l-6.5-3.7V10Zm15 5.4L13 19.1v-5.4l6.5-3.7v5.4Z" />
+      </svg>
+    </div>
+    <div class="sidebar-identity">
       <div class="budget-name"><%= @budget.name %></div>
       <div class="user-email"><%= @user.email %></div>
     </div>
+    <span class="sidebar-chevron" aria-hidden="true">⌄</span>
   </div>
 
-  <div class="side-body" id="side-body">
-    <nav class="side-nav">
-      <%# Navigation link to the budget overview page %>
-      <%= link_to "Budget", budget_path(@budget), class: ["nav-item", ("active" if controller_name == "budgets")] %>
-
-      <%# List of all accounts %>
-      <% @accounts.each do |account| %>
-      <li><%= account.name %></li>
+  <div class="side-body">
+    <nav class="side-nav" aria-label="Main navigation">
+      <%= link_to root_path, class: ["nav-item", ("active" if controller_name == "budgets")] do %>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M3 5h18v14H3V5Zm2 2v2h14V7H5Zm0 4v6h14v-6H5Zm2 1h4v3H7v-3Z" />
+        </svg>
+        <span>Budget</span>
       <% end %>
     </nav>
+
+    <div class="account-groups">
+      <% if budget_accounts.any? %>
+        <section class="account-group" aria-labelledby="budget-accounts-heading">
+          <h2 id="budget-accounts-heading" class="account-group-heading">
+            <span class="group-chevron" aria-hidden="true">⌄</span>
+            <span>Budget</span>
+            <span class="account-count"><%= budget_accounts.size %></span>
+          </h2>
+          <ul class="account-list">
+            <% budget_accounts.each do |account| %>
+              <li class="account-item">
+                <span class="account-dot" aria-hidden="true"></span>
+                <span class="account-name"><%= account.name %></span>
+                <span class="account-kind"><%= account.kind.humanize %></span>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
+
+      <% if tracking_accounts.any? %>
+        <section class="account-group" aria-labelledby="tracking-accounts-heading">
+          <h2 id="tracking-accounts-heading" class="account-group-heading">
+            <span class="group-chevron" aria-hidden="true">⌄</span>
+            <span>Tracking</span>
+            <span class="account-count"><%= tracking_accounts.size %></span>
+          </h2>
+          <ul class="account-list">
+            <% tracking_accounts.each do |account| %>
+              <li class="account-item">
+                <span class="account-dot" aria-hidden="true"></span>
+                <span class="account-name"><%= account.name %></span>
+                <span class="account-kind"><%= account.kind.humanize %></span>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
+
+      <% if closed_accounts.any? %>
+        <details class="account-group closed-accounts">
+          <summary class="account-group-heading">
+            <span class="group-chevron" aria-hidden="true">›</span>
+            <span>Closed</span>
+            <span class="account-count"><%= closed_accounts.size %></span>
+          </summary>
+          <ul class="account-list">
+            <% closed_accounts.each do |account| %>
+              <li class="account-item account-item--closed">
+                <span class="account-dot" aria-hidden="true"></span>
+                <span class="account-name"><%= account.name %></span>
+                <span class="account-kind"><%= account.kind.humanize %></span>
+              </li>
+            <% end %>
+          </ul>
+        </details>
+      <% end %>
+    </div>
 
     <div class="sidebar-foot">
       <%= link_to "Account settings", edit_user_registration_path, class: "link-btn" %>

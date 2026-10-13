@@ -10,5 +10,7 @@ class SidebarComponentTest < ViewComponent::TestCase
     assert_text budgets(:one).name
     assert_text users(:one).email
     assert_link "Budget", href: "/budgets/#{budgets(:one).id}"
+    assert_selector ".account-group-heading", text: "Closed"
+    assert_selector ".closed-accounts .account-item", text: accounts(:one).name, visible: :all
   end
 end
