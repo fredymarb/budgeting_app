@@ -2,12 +2,37 @@
 
 class Category
   class CategoryComponent < ViewComponent::Base
-    def initialize(category:, budgeted_minor:, activity_minor:, available_minor:, currency:)
+    def initialize(category:, budgeted_minor:, allocation_id:, activity_minor:, available_minor:, budget_month:, currency:)
       @category = category
       @budgeted_minor = budgeted_minor
+      @allocation_id = allocation_id
       @activity_minor = activity_minor
       @available_minor = available_minor
+      @budget_month = budget_month
       @currency = currency
+    end
+
+    def allocation_path
+      if @allocation_id
+        helpers.category_group_category_monthly_allocation_path(
+          @category.category_group_id,
+          @category,
+          @allocation_id
+        )
+      else
+        helpers.category_group_category_monthly_allocations_path(
+          @category.category_group_id,
+          @category
+        )
+      end
+    end
+
+    def allocation_method
+      @allocation_id ? :patch : :post
+    end
+
+    def budgeted_amount
+      Money.format_from_minor(@budgeted_minor, exponent: Money::EXPONENTS.fetch(@currency, 2))
     end
 
     def spending_minor

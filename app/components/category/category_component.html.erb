@@ -19,7 +19,17 @@
       <% end %>
     </div>
   </div>
-  <div class="category-number" role="cell"><%= helpers.budget_money(@budgeted_minor, currency: @currency) %></div>
+  <div class="category-number category-budgeted-edit" role="cell">
+    <details>
+      <summary><%= helpers.budget_money(@budgeted_minor, currency: @currency) %></summary>
+      <%= form_with url: allocation_path, method: allocation_method, scope: :monthly_allocation do |form| %>
+        <%= form.hidden_field :budget_month, value: @budget_month.beginning_of_month %>
+        <%= form.label :assigned_amount, "Budgeted amount for #{@category.name}", class: "visually-hidden" %>
+        <%= form.text_field :assigned_amount, value: budgeted_amount, inputmode: "decimal", required: true, autocomplete: "off" %>
+        <%= form.submit "Save" %>
+      <% end %>
+    </details>
+  </div>
   <div class="category-number category-activity" role="cell"><%= helpers.budget_money(@activity_minor, currency: @currency) %></div>
   <div class="category-number" role="cell">
     <span class="category-available <%= available_class %>">

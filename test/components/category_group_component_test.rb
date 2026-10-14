@@ -9,7 +9,9 @@ class CategoryGroupComponentTest < ViewComponent::TestCase
     render_inline(CategoryGroup::CategoryGroupComponent.new(
       category_group: category_groups(:one),
       budgeted_by_category: { category.id => 40_000 },
+      allocation_id_by_category: { category.id => monthly_allocations(:one).id },
       activity_by_category: { category.id => 10_000 },
+      budget_month: Date.new(2026, 10, 1),
       currency: "USD"
     ))
 
