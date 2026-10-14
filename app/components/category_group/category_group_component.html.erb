@@ -16,8 +16,10 @@
       <%= render Category::CategoryComponent.new(
         category: category,
         budgeted_minor: budgeted,
+        allocation_id: @allocation_id_by_category[category.id],
         activity_minor: -activity,
         available_minor: budgeted - activity,
+        budget_month: @budget_month,
         currency: @currency
       ) %>
     <% end %>

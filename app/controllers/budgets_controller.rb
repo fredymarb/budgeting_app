@@ -7,10 +7,10 @@ class BudgetsController < ApplicationController
     category_ids = @category_groups.flat_map { |group| group.categories.map(&:id) }
     month_range = @month.beginning_of_month..@month.end_of_month
 
-    @budgeted_by_category = @budget.monthly_allocations
+    monthly_allocations = @budget.monthly_allocations
       .where(category_id: category_ids, budget_month: month_range)
-      .pluck(:category_id, :assigned_minor)
-      .to_h
+    @budgeted_by_category = monthly_allocations.pluck(:category_id, :assigned_minor).to_h
+    @allocation_id_by_category = monthly_allocations.pluck(:category_id, :id).to_h
     @activity_by_category = Transaction.where(
       budget_id: @budget.id,
       category_id: category_ids,
