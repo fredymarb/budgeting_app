@@ -1,0 +1,20 @@
+<div
+  class="calendar"
+  data-controller="budget-calendar"
+  data-budget-calendar-month-value="<%= @month.strftime("%Y-%m") %>"
+  data-budget-calendar-base-path-value="<%= budget_path %>"
+>
+  <button
+    class="calendar-navigation calendar-navigation--previous"
+    type="button"
+    aria-label="Previous month"
+    data-action="budget-calendar#previous"
+  >&lt;</button>
+  <span class="calendar-current-month"><%= @month.strftime("%b %Y") %></span>
+  <button
+    class="calendar-navigation calendar-navigation--next"
+    type="button"
+    aria-label="Next month"
+    data-action="budget-calendar#next"
+  >&gt;</button>
+</div>

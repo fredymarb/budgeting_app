@@ -270,6 +270,44 @@ body {
   background: #fff;
 }
 
+.calendar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar-navigation {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 2px solid #7085d2;
+  border-radius: 50%;
+  color: #5369bb;
+  background: #fff;
+  font: inherit;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.calendar-navigation:hover {
+  background: #f1f4ff;
+}
+
+.calendar-navigation:focus-visible {
+  outline: 2px solid #293b70;
+  outline-offset: 2px;
+}
+
+.calendar-current-month {
+  color: #303b4d;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .budget-content {
   min-width: 0;
   overflow-x: auto;
