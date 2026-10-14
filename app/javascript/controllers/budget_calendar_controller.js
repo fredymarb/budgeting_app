@@ -19,6 +19,6 @@ export default class extends Controller {
     const target = new Date(year, month - 1 + offset, 1)
     const targetMonth = `${target.getFullYear()}-${String(target.getMonth() + 1).padStart(2, "0")}`
 
-    window.location.assign(`${this.basePathValue}/${targetMonth}`)
+    window.Turbo.visit(`${this.basePathValue}/${targetMonth}`)
   }
 }
