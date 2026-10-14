@@ -14,16 +14,9 @@ class Category
 
     def allocation_path
       if @allocation_id
-        helpers.category_group_category_monthly_allocation_path(
-          @category.category_group_id,
-          @category,
-          @allocation_id
-        )
+        helpers.category_monthly_allocation_path(@category, @allocation_id)
       else
-        helpers.category_group_category_monthly_allocations_path(
-          @category.category_group_id,
-          @category
-        )
+        helpers.category_monthly_allocations_path(@category)
       end
     end
 

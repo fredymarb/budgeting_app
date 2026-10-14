@@ -16,8 +16,7 @@ class MonthlyAllocationsController < ApplicationController
 
   def set_budget_and_category
     @budget = current_user.budgets.first!
-    category_group = @budget.category_groups.find(params[:category_group_id])
-    @category = category_group.categories.find(params[:category_id])
+    @category = @budget.categories.find(params[:category_id])
   end
 
   def save_monthly_allocation(create: false)

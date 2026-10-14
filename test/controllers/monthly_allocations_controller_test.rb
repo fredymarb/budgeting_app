@@ -6,9 +6,7 @@ class MonthlyAllocationsControllerTest < ActionDispatch::IntegrationTest
   test "updates a category's budgeted amount" do
     sign_in users(:one)
 
-    patch category_group_category_monthly_allocation_url(
-      category_groups(:one), categories(:one), monthly_allocations(:one)
-    ), params: {
+    patch category_monthly_allocation_url(categories(:one), monthly_allocations(:one)), params: {
       monthly_allocation: { assigned_amount: "42.75", budget_month: "2026-10-01" }
     }
 
@@ -20,7 +18,7 @@ class MonthlyAllocationsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:one)
 
     assert_difference("MonthlyAllocation.count", 1) do
-      post category_group_category_monthly_allocations_url(category_groups(:one), categories(:one)), params: {
+      post category_monthly_allocations_url(categories(:one)), params: {
         monthly_allocation: { assigned_amount: "125.50", budget_month: "2026-11-01" }
       }
     end
@@ -34,9 +32,7 @@ class MonthlyAllocationsControllerTest < ActionDispatch::IntegrationTest
   test "rejects invalid amounts without changing the existing allocation" do
     sign_in users(:one)
 
-    patch category_group_category_monthly_allocation_url(
-      category_groups(:one), categories(:one), monthly_allocations(:one)
-    ), params: {
+    patch category_monthly_allocation_url(categories(:one), monthly_allocations(:one)), params: {
       monthly_allocation: { assigned_amount: "not money", budget_month: "2026-10-01" }
     }
 
@@ -48,9 +44,7 @@ class MonthlyAllocationsControllerTest < ActionDispatch::IntegrationTest
   test "cannot update an allocation in another budget" do
     sign_in users(:one)
 
-    patch category_group_category_monthly_allocation_url(
-      category_groups(:two), categories(:two), monthly_allocations(:two)
-    ), params: {
+    patch category_monthly_allocation_url(categories(:two), monthly_allocations(:two)), params: {
       monthly_allocation: { assigned_amount: "42.75", budget_month: "2026-10-01" }
     }
 

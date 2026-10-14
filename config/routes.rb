@@ -10,10 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :category_groups do
-    resources :categories do
-      resources :monthly_allocations, only: [ :create, :update ]
-    end
+  resources :category_groups
+
+  resources :categories do
+    resources :monthly_allocations, only: [ :create, :update ]
   end
 
   resources :payees
