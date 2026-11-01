@@ -69,4 +69,4 @@ end
 gem "devise", "~> 5.0"
 
 # View components for building reusable UI elements [https://viewcomponent.org]
-gem "view_component", "~> 4.15"
+gem "view_component", "~> 4.20"
